@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Agregar repuesto</title>
+
+    <!-- Conectamos el CSS principal de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de repuestos</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+            <a href="/servicios">Servicios</a>
+            <a href="/repuestos">Repuestos</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Agregar repuesto a la orden</h2>
+
+            <!-- Formulario para asociar un repuesto a la orden -->
+            <form
+                action="/ordenes/{{ orden_id }}/repuestos/nuevo"
+                method="POST"
+                class="formulario-card"
+            >
+
+                <!-- Selección del repuesto -->
+                <label for="repuesto_id">Repuesto:</label>
+
+                <select id="repuesto_id" name="repuesto_id" required>
+
+                    {% for repuesto in repuestos %}
+
+                    <option value="{{ repuesto.id }}">
+                        {{ repuesto.nombre }}
+                        - ${{ repuesto.precio_unitario }}
+                        - {{ repuesto.unidad_medida }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <!-- Cantidad de repuestos -->
+                <label for="cantidad">Cantidad:</label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    name="cantidad"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+                <!-- Precio unitario del repuesto -->
+                <label for="precio_unitario">Precio unitario:</label>
+
+                <input
+                    type="number"
+                    id="precio_unitario"
+                    name="precio_unitario"
+                    step="0.01"
+                    min="0"
+                    required
+                >
+
+                <!-- Botón para agregar el repuesto -->
+                <button type="submit" class="boton-accion">
+                    Agregar repuesto
+                </button>
+
+                <!-- Volver al listado de órdenes -->
+                <a href="/ordenes" class="boton-volver">
+                    ← Volver a órdenes
+                </a>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

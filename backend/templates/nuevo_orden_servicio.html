@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Agregar servicio</title>
+
+    <!-- Conectamos el CSS principal de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de servicios</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Agregar servicio a la orden</h2>
+
+            <!-- Formulario para asociar un servicio a la orden -->
+            <form
+                action="/ordenes/{{ orden_id }}/servicios/nuevo"
+                method="POST"
+                class="formulario-card"
+            >
+
+                <label for="servicio_id">Servicio:</label>
+
+                <select id="servicio_id" name="servicio_id" required>
+
+                    {% for servicio in servicios %}
+
+                    <option value="{{ servicio.id }}">
+                        {{ servicio.nombre }} - ${{ servicio.precio_base }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <label for="cantidad">Cantidad:</label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    name="cantidad"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+                <label for="precio_unitario">Precio unitario:</label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    id="precio_unitario"
+                    name="precio_unitario"
+                    min="0"
+                    required
+                >
+
+                <!-- Botón para agregar el servicio -->
+                <button type="submit" class="boton-accion">
+                    Agregar servicio
+                </button>
+
+                <!-- Volver al listado de órdenes -->
+                <a href="/ordenes" class="boton-volver">
+                    ← Volver a órdenes
+                </a>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

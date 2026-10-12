@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Repuestos</title>
+
+    <!-- Conectamos el CSS de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de repuestos</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/#administracion">Administración</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+            <a href="/servicios">Servicios</a>
+            <a href="/repuestos">Repuestos</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Repuestos registrados</h2>
+
+            <!-- Botón para volver al inicio -->
+            <div class="acciones-pagina">
+                <a href="/" class="boton-volver">
+                    ← Volver al inicio
+                </a>
+            </div>
+
+            <!-- Listado de repuestos -->
+            <div>
+
+                {% for repuesto in repuestos %}
+
+                <!-- Tarjeta individual de cada repuesto -->
+                <article>
+
+                    <h3>{{ repuesto.nombre }}</h3>
+
+                    <p>
+                        Cantidad:
+                        {{ repuesto.cantidad }}
+                        {{ repuesto.unidad_medida }}
+                    </p>
+
+                    <p>
+                        Precio unitario:
+                        ${{ repuesto.precio_unitario }}
+                    </p>
+
+                    <p>
+                        Estado:
+                        {{ repuesto.estado }}
+                    </p>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

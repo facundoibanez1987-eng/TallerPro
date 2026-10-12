@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Detalle de orden</title>
+
+    <!-- Conectamos el CSS principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado principal -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Detalle de la orden de trabajo</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/ordenes">Órdenes</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2 class="titulo-panel">Orden #{{ orden.id }}</h2>
+
+            <!-- Datos de la orden, sin posibilidad de modificarlos -->
+            <div class="formulario-card">
+
+                <p><strong>Vehículo:</strong>
+                    {{ orden.vehiculo.marca }} {{ orden.vehiculo.modelo }}
+                </p>
+
+                <p><strong>Tipo de orden:</strong>
+                    {{ orden.tipo_orden }}
+                </p>
+
+                <p><strong>Fecha de ingreso:</strong>
+                    {{ orden.fecha_ingreso }}
+                </p>
+
+                <p><strong>Fecha de entrega:</strong>
+                    {{ orden.fecha_entrega or 'Sin definir' }}
+                </p>
+
+                <p><strong>Tipo de servicio:</strong>
+                    {{ orden.tipo_servicio }}
+                </p>
+
+                <p><strong>Descripción:</strong>
+                    {{ orden.descripcion }}
+                </p>
+
+                <p><strong>Estado:</strong>
+                    {{ orden.estado }}
+                </p>
+
+                <p><strong>Costo:</strong>
+                    {{ orden.costo }}
+                </p>
+
+                <!-- Acciones disponibles -->
+                <div class="acciones-pagina">
+
+                    <a
+                        href="/ordenes/editar/{{ orden.id }}"
+                        class="boton-accion"
+                    >
+                        Editar orden
+                    </a>
+
+                    <a href="/ordenes" class="boton-volver">
+                        ← Volver a órdenes
+                    </a>
+
+                    <a href="/" class="boton-volver">
+                        ← Volver al inicio
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

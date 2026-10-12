@@ -1,0 +1,233 @@
+<!-- Indicamos que estamos trabajando con HTML5 -->
+<!DOCTYPE html>
+
+<!-- Definimos que el documento está escrito en español -->
+<html lang="es">
+
+<head>
+    <!-- Permitimos caracteres como ñ y tildes -->
+    <meta charset="UTF-8">
+
+    <!-- Hacemos que la página se adapte a celulares y computadoras -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparecerá en la pestaña del navegador -->
+    <title>TallerPro | Gestión de Taller</title>
+
+    <!-- Descripción de nuestra aplicación -->
+    <meta name="description" content="Sistema de gestión para talleres mecánicos">
+
+    <!-- Conectamos nuestra hoja de estilos CSS con el documento HTML -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<!-- Identificamos el inicio de la página para poder volver a él -->
+<body id="inicio">
+
+    <!-- Encabezado principal de TallerPro -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Sistema de gestión para talleres mecánicos</p>
+
+        <!-- Menú principal de navegación -->
+        <nav>
+
+            <!-- Enlace a la página de inicio -->
+            <a href="/">Inicio</a>
+
+            <!-- Enlace al resumen general del taller -->
+            <a href="#resumen">Resumen</a>
+
+            <!-- Enlace al panel de administración -->
+            <a href="#administracion">Administración</a>
+
+            <!-- Enlace al seguimiento de las órdenes -->
+            <a href="#seguimiento">Seguimiento</a>
+
+        </nav>
+    </header>
+
+    <!-- Contenido principal de la aplicación -->
+    <main>
+
+        <!-- Sección de bienvenida -->
+        <section id="bienvenida">
+
+            <!-- Título principal del panel -->
+            <h2 class="titulo-panel">Panel de gestión</h2>
+
+            <p>
+                Gestioná clientes, vehículos, órdenes de trabajo,
+                servicios y repuestos.
+            </p>
+
+        </section>
+
+<!-- Sección con indicadores generales del taller -->
+<section id="resumen">
+
+    <!-- Título del resumen -->
+    <h2 class="titulo-panel">Resumen del taller</h2>
+
+    <!-- Contenedor de los indicadores -->
+    <div class="indicadores-container">
+
+        <!-- Cantidad total de clientes -->
+        <article class="indicador-card">
+            <h3 class="titulo-tarjeta">Clientes registrados</h3>
+            <p class="indicador-numero">{{ total_clientes }}</p>
+            <p class="indicador-descripcion">Clientes en la base de datos</p>
+        </article>
+
+        <!-- Cantidad total de vehículos -->
+        <article class="indicador-card">
+            <h3 class="titulo-tarjeta">Vehículos registrados</h3>
+            <p class="indicador-numero">{{ total_vehiculos }}</p>
+            <p class="indicador-descripcion">Vehículos en el sistema</p>
+        </article>
+
+        <!-- Cantidad de órdenes en proceso -->
+        <article class="indicador-card">
+            <h3 class="titulo-tarjeta">Órdenes en proceso</h3>
+            <p class="indicador-numero">{{ ordenes_en_proceso }}</p>
+            <p class="indicador-descripcion">Trabajos pendientes de finalizar</p>
+        </article>
+
+        <!-- Cantidad de tipos de repuestos -->
+        <article class="indicador-card">
+            <h3 class="titulo-tarjeta">Tipos de repuestos</h3>
+            <p class="indicador-numero">{{ total_tipos_repuestos }}</p>
+            <p class="indicador-descripcion">Productos registrados</p>
+        </article>
+
+    </div>
+
+</section>
+
+        <!-- Sección con las principales áreas administrativas -->
+        <section id="administracion">
+
+            <!-- Título de la sección de administración -->
+            <h2 class="titulo-panel">Administración</h2>
+
+            <div>
+
+                <!-- Tarjeta para gestionar clientes -->
+                <article>
+                    <h3 class="titulo-tarjeta">Clientes</h3>
+                    <p>Gestioná los clientes del taller.</p>
+                    <a href="/clientes">Ver clientes</a>
+                </article>
+
+                <!-- Tarjeta para gestionar vehículos -->
+                <article>
+                    <h3 class="titulo-tarjeta">Vehículos</h3>
+                    <p>Consultá y administrá los vehículos registrados.</p>
+                    <a href="/vehiculos">Ver vehículos</a>
+                </article>
+
+                <!-- Tarjeta para gestionar órdenes de trabajo -->
+                <article>
+                    <h3 class="titulo-tarjeta">Órdenes de trabajo</h3>
+                    <p>Controlá los trabajos realizados en cada vehículo.</p>
+                    <a href="/ordenes">Ver órdenes</a>
+                </article>
+
+                <!-- Tarjeta para gestionar servicios -->
+                <article>
+                    <h3 class="titulo-tarjeta">Servicios</h3>
+                    <p>Administrá los servicios disponibles.</p>
+                    <a href="/servicios">Ver servicios</a>
+                </article>
+
+                <!-- Tarjeta para gestionar repuestos -->
+                <article>
+                    <h3 class="titulo-tarjeta">Repuestos</h3>
+                    <p>Controlá el inventario de repuestos.</p>
+                    <a href="/repuestos">Ver repuestos</a>
+                </article>
+
+            </div>
+
+        </section>
+
+      
+<!-- Sección para realizar el seguimiento de las órdenes -->
+<section id="seguimiento">
+
+    <!-- Título de la sección -->
+    <h2 class="titulo-panel">Seguimiento del taller</h2>
+
+    <p>
+        Consultá las órdenes más recientes y revisá el estado
+        de los trabajos del taller.
+    </p>
+
+    <!-- Contenedor de la tabla de seguimiento -->
+    <div class="tabla-seguimiento-contenedor">
+
+        <table class="tabla-seguimiento">
+
+            <!-- Encabezados de las columnas -->
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Vehículo</th>
+                    <th>Fecha de ingreso</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <!-- Datos de las órdenes recibidas desde Flask -->
+            <tbody>
+                {% for orden in ordenes_recientes %}
+                <tr>
+                    <td>#{{ orden.id }}</td>
+                    <td>{{ orden.vehiculo.marca }} {{ orden.vehiculo.modelo }}</td>
+                    <td>{{ orden.fecha_ingreso }}</td>
+                    <td>{{ orden.estado }}</td>
+                    <td>
+                <!-- Abrimos la pantalla de consulta de la orden -->
+                        <a href="/ordenes/{{ orden.id }}">
+                             Ver orden
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <!-- Mensaje cuando todavía no hay órdenes -->
+                <tr>
+                    <td colspan="5">
+                        Todavía no hay órdenes de trabajo registradas.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Acceso a todas las órdenes -->
+    <p class="enlace-todas-ordenes">
+        <a href="/ordenes">Ver todas las órdenes</a>
+    </p>
+
+</section>
+
+        <!-- Botón para volver al inicio de la página -->
+        <div class="volver-arriba">
+            <a href="#inicio">↑ Volver arriba</a>
+        </div>
+
+    </main>
+
+    <!-- Pie de página -->
+
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

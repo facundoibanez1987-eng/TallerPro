@@ -1,0 +1,137 @@
+<!-- Indicamos que estamos trabajando con HTML5 -->
+<!DOCTYPE html>
+
+<!-- Definimos que el documento está escrito en español -->
+<html lang="es">
+
+<head>
+    <!-- Permitimos caracteres como ñ y tildes -->
+    <meta charset="UTF-8">
+
+    <!-- Hacemos que la página se adapte a celulares y computadoras -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparecerá en la pestaña del navegador -->
+    <title>TallerPro | Gestión de Taller</title>
+
+    <!-- Descripción de nuestra aplicación -->
+    <meta name="description" content="Sistema de gestión para talleres mecánicos">
+
+    <!-- Conectamos nuestra hoja de estilos CSS con el documento HTML -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- Encabezado principal de TallerPro -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Sistema de gestión para talleres mecánicos</p>
+
+        <!-- Creamos el menú principal de navegación -->
+<nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#administracion">Administración</a>
+    <a href="#quienes-somos">Quiénes somos</a>
+    <a href="#contacto">Contacto</a>
+</nav>
+
+    </header>
+
+    <!-- Contenido principal de la aplicación -->
+    <main>
+
+        <!-- Sección de bienvenida -->
+        <section id="inicio">
+            <h2>Panel de gestión</h2>
+            <p>Gestioná clientes, vehículos, órdenes de trabajo, servicios y repuestos.</p>
+        </section>
+
+        <!-- Sección con las principales áreas del sistema -->
+        <section id="administracion">
+            <h2>Administración</h2>
+
+            <div>
+            <!-- Tarjeta que permite acceder a la gestión de clientes -->
+                <article>
+                    <h3>Clientes</h3>
+                    <p>Gestioná los clientes del taller.</p>
+                    <a href="#clientes">Ver clientes</a>
+                </article>
+
+                <article>
+                    <h3>Vehículos</h3>
+                    <p>Consultá y administrá los vehículos registrados.</p>
+                </article>
+
+                <article>
+                    <h3>Órdenes de trabajo</h3>
+                    <p>Controlá los trabajos realizados en cada vehículo.</p>
+                </article>
+
+                <article>
+                    <h3>Servicios</h3>
+                    <p>Administrá los servicios disponibles.</p>
+                </article>
+
+                <article>
+                    <h3>Repuestos</h3>
+                    <p>Controlá el inventario de repuestos.</p>
+                </article>
+            </div>
+        </section>
+
+<!-- Sección donde mostraremos los clientes registrados -->
+<section id="clientes">
+    <h2>Clientes</h2>
+
+    <p>Clientes registrados en TallerPro.</p>
+
+    <div>
+        <article>
+            <h3>Juan Pérez</h3>
+            <p>Teléfono: 11-2233-4455</p>
+            <p>Email: juan.perez@email.com</p>
+        </article>
+
+        <article>
+            <h3>María Gómez</h3>
+            <p>Teléfono: 11-6677-8899</p>
+            <p>Email: maria.gomez@email.com</p>
+        </article>
+
+        <article>
+            <h3>Carlos Rodríguez</h3>
+            <p>Teléfono: 11-5566-7788</p>
+            <p>Email: carlos.rodriguez@email.com</p>
+        </article>
+    </div>
+</section>        
+
+        <!-- Sección que presenta el taller -->
+<section id="quienes-somos">
+    <h2>Quiénes somos</h2>
+    <p>
+        TallerPro es un taller mecánico orientado al mantenimiento
+        y reparación de vehículos.
+    </p>
+</section>
+
+<!-- Sección con los datos de contacto -->
+<section id="contacto">
+    <h2>Contacto</h2>
+    <p>Teléfono: 11-5555-5555</p>
+    <p>Email: contacto@tallerpro.com</p>
+    <p>Dirección: Avenida Argentina 123, Buenos Aires, Argentina</p>
+</section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

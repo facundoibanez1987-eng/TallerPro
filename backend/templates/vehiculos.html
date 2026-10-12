@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Vehículos</title>
+
+    <!-- Conectamos el CSS de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de vehículos</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/#administracion">Administración</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Vehículos registrados</h2>
+
+            <!-- Botón para volver al inicio -->
+            <div class="acciones-pagina">
+                <a href="/" class="boton-volver">
+                    ← Volver al inicio
+                </a>
+            </div>
+
+            <!-- Tarjetas de vehículos -->
+            <div>
+
+                {% for vehiculo in vehiculos %}
+
+                <article>
+
+                    <h3>{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>
+
+                    <p>Patente: {{ vehiculo.patente }}</p>
+
+                    <p>Año: {{ vehiculo.anio }}</p>
+
+                    <p>
+                        Propietario:
+                        {{ vehiculo.cliente.nombre }}
+                        {{ vehiculo.cliente.apellido }}
+                    </p>
+
+                    <a href="/vehiculos/editar/{{ vehiculo.id }}">Editar</a>
+                    <a href="/vehiculos/eliminar/{{ vehiculo.id }}">Eliminar</a>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

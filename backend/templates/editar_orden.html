@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Editar orden</title>
+
+    <!-- Conectamos el CSS principal de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de órdenes de trabajo</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Editar orden de trabajo</h2>
+
+            <!-- Formulario para modificar la orden -->
+            <form
+                action="/ordenes/editar/{{ orden.id }}"
+                method="POST"
+                class="formulario-card"
+            >
+
+                <!-- Tipo de orden -->
+                <label for="tipo_orden">Tipo de orden:</label>
+
+                <select id="tipo_orden" name="tipo_orden" required>
+
+                    <option value="SERVICIO"
+                        {% if orden.tipo_orden == "SERVICIO" %}selected{% endif %}>
+                        Servicio
+                    </option>
+
+                    <option value="REPARACION"
+                        {% if orden.tipo_orden == "REPARACION" %}selected{% endif %}>
+                        Reparación
+                    </option>
+
+                </select>
+
+                <!-- Fecha de entrega -->
+                <label for="fecha_entrega">Fecha de entrega:</label>
+
+                <input
+                    type="date"
+                    id="fecha_entrega"
+                    name="fecha_entrega"
+                    value="{{ orden.fecha_entrega or '' }}"
+                >
+
+                <!-- Tipo de servicio -->
+                <label for="tipo_servicio">Tipo de servicio:</label>
+
+                <input
+                    type="text"
+                    id="tipo_servicio"
+                    name="tipo_servicio"
+                    value="{{ orden.tipo_servicio }}"
+                    required
+                >
+
+                <!-- Descripción de la orden -->
+                <label for="descripcion">Descripción:</label>
+
+                <input
+                    type="text"
+                    id="descripcion"
+                    name="descripcion"
+                    value="{{ orden.descripcion }}"
+                    required
+                >
+
+                <!-- Estado actual de la orden -->
+                <label for="estado">Estado:</label>
+
+                <select id="estado" name="estado" required>
+
+                    <option value="PENDIENTE"
+                        {% if orden.estado == "PENDIENTE" %}selected{% endif %}>
+                        Pendiente
+                    </option>
+
+                    <option value="EN PROCESO"
+                        {% if orden.estado == "EN PROCESO" %}selected{% endif %}>
+                        En proceso
+                    </option>
+
+                    <option value="FINALIZADO"
+                        {% if orden.estado == "FINALIZADO" %}selected{% endif %}>
+                        Finalizado
+                    </option>
+
+                </select>
+
+                <!-- Costo de la orden -->
+                <label for="costo">Costo:</label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    id="costo"
+                    name="costo"
+                    value="{{ orden.costo }}"
+                    required
+                >
+
+                <!-- Guardar cambios -->
+                <button type="submit" class="boton-accion">
+                    Guardar cambios
+                </button>
+
+                <!-- Volver al listado sin guardar -->
+                <a href="/ordenes" class="boton-volver">
+                    ← Volver a órdenes
+                </a>
+
+                <!-- Volver al panel principal de TallerPro -->
+                <a href="/" class="boton-volver">
+                    ← Volver al inicio
+                </a>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

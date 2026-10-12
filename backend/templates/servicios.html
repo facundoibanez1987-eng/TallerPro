@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Servicios</title>
+
+    <!-- Conectamos el CSS de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de servicios</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/#administracion">Administración</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+            <a href="/servicios">Servicios</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Servicios disponibles</h2>
+
+            <!-- Botón para volver al inicio -->
+            <div class="acciones-pagina">
+                <a href="/" class="boton-volver">
+                    ← Volver al inicio
+                </a>
+            </div>
+
+            <!-- Listado de servicios disponibles -->
+            <div>
+
+                {% for servicio in servicios %}
+
+                <!-- Tarjeta individual de cada servicio -->
+                <article>
+
+                    <h3>{{ servicio.nombre }}</h3>
+
+                    <p>{{ servicio.descripcion }}</p>
+
+                    <p>Precio base: ${{ servicio.precio_base }}</p>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

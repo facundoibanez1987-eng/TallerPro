@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Clientes</title>
+
+    <!-- Conectamos el CSS principal de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de clientes</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/#administracion">Administración</a>
+            <a href="/clientes">Clientes</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Clientes registrados</h2>
+
+            <!-- Acciones principales -->
+            <div class="acciones-pagina">
+
+                <a href="/clientes/nuevo" class="boton-accion">
+                    ＋ Nuevo cliente
+                </a>
+
+                <a href="/" class="boton-volver">
+                    ← Volver al inicio
+                </a>
+
+            </div>
+
+            <!-- Buscador de clientes -->
+            <form action="/clientes" method="GET" class="formulario-busqueda">
+
+                <label for="buscar">Buscar clientes:</label>
+
+                <div class="busqueda-campos">
+
+                    <input
+                        type="search"
+                        id="buscar"
+                        name="buscar"
+                        value="{{ buscar }}"
+                        placeholder="Nombre, apellido, DNI, teléfono o email..."
+                    >
+
+                    <button type="submit" class="boton-accion">
+                        Buscar
+                    </button>
+
+                    {% if buscar %}
+                    <a href="/clientes" class="boton-volver">
+                        Limpiar
+                    </a>
+                    {% endif %}
+
+                </div>
+
+            </form>
+
+            <!-- Cantidad de resultados -->
+            <p class="contador-clientes">
+                {% if total_clientes == 0 %}
+
+                    No se encontraron clientes.
+
+                {% else %}
+
+                    Se encontraron {{ total_clientes }} cliente(s).
+                    Mostrando la página {{ pagina }} de {{ total_paginas }}.
+
+                {% endif %}
+            </p>
+
+            <!-- Tarjetas de clientes -->
+            <div class="lista-clientes">
+
+                {% for cliente in clientes %}
+
+                <article class="cliente-card">
+
+                    <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
+
+                    <p>DNI: {{ cliente.dni or 'Pendiente de cargar' }}</p>
+
+                    <p>Teléfono: {{ cliente.telefono }}</p>
+
+                    <p>Email: {{ cliente.email or 'No informado' }}</p>
+
+                    <!-- Acciones del cliente -->
+                    <div class="acciones-cliente">
+
+                        <a
+                            class="boton-accion"
+                            href="/clientes/editar/{{ cliente.id }}"
+                        >
+                            Editar
+                        </a>
+
+                        <a
+                            class="boton-eliminar"
+                            href="/clientes/eliminar/{{ cliente.id }}"
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');"
+                        >
+                            Eliminar
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% else %}
+
+                <p class="sin-clientes">
+                    No hay clientes para mostrar con esos criterios.
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+            <!-- Navegación entre páginas -->
+            {% if total_paginas > 1 %}
+
+            <nav class="paginacion" aria-label="Paginación de clientes">
+
+                {% if pagina > 1 %}
+                <a
+                    class="boton-volver"
+                    href="{{ url_for('clientes', buscar=buscar, pagina=pagina - 1) }}"
+                >
+                    ← Anterior
+                </a>
+                {% endif %}
+
+                <span>Página {{ pagina }} de {{ total_paginas }}</span>
+
+                {% if pagina < total_paginas %}
+                <a
+                    class="boton-accion"
+                    href="{{ url_for('clientes', buscar=buscar, pagina=pagina + 1) }}"
+                >
+                    Siguiente →
+                </a>
+                {% endif %}
+
+            </nav>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

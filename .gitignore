@@ -1,0 +1,21 @@
+# Archivo con las credenciales de la base de datos
+.env
+
+# Archivos generados automáticamente por Python
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Archivos de configuración local
+.vscode/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales y logs
+*.log

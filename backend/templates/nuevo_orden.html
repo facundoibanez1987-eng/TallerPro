@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nueva orden de trabajo</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>TallerPro</h1>
+
+        <p>Sistema de gestión de taller</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section>
+
+            <h2>Registrar orden de trabajo</h2>
+
+            <form action="/ordenes/nuevo" method="POST">
+
+                <label for="vehiculo_id">Vehículo:</label>
+
+                <select id="vehiculo_id" name="vehiculo_id">
+
+                    {% for vehiculo in vehiculos %}
+
+                        <option value="{{ vehiculo.id }}">
+                            {{ vehiculo.marca }} {{ vehiculo.modelo }} - {{ vehiculo.patente }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <br><br>
+
+                <label for="tipo_orden">Tipo de orden:</label>
+
+                <select id="tipo_orden" name="tipo_orden">
+
+                    <option value="SERVICIO">Servicio</option>
+                    <option value="REPARACION">Reparación</option>
+
+                </select>
+
+                <br><br>
+
+                <label for="fecha_ingreso">Fecha de ingreso:</label>
+                <input type="date" id="fecha_ingreso" name="fecha_ingreso">
+
+                <br><br>
+
+                <label for="fecha_entrega">Fecha de entrega:</label>
+                <input type="date" id="fecha_entrega" name="fecha_entrega">
+
+                <br><br>
+
+                <label for="tipo_servicio">Tipo de servicio:</label>
+                <input type="text" id="tipo_servicio" name="tipo_servicio">
+
+                <br><br>
+
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion">
+
+                <br><br>
+
+                <label for="estado">Estado:</label>
+
+                <select id="estado" name="estado">
+
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="EN PROCESO">En proceso</option>
+                    <option value="FINALIZADO">Finalizado</option>
+
+                </select>
+
+                <br><br>
+
+                <label for="costo">Costo:</label>
+                <input type="number" step="0.01" id="costo" name="costo">
+
+                <br><br>
+
+                <button type="submit">Registrar orden</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

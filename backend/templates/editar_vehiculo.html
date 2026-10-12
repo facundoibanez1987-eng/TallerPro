@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Editar vehículo</title>
+
+    <!-- Conectamos el CSS principal de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de vehículos</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Editar vehículo</h2>
+
+            <!-- Formulario para modificar un vehículo existente -->
+            <form
+                action="/vehiculos/editar/{{ vehiculo.id }}"
+                method="POST"
+                class="formulario-card"
+            >
+
+                <label for="patente">Patente:</label>
+                <input
+                    type="text"
+                    id="patente"
+                    name="patente"
+                    value="{{ vehiculo.patente }}"
+                    maxlength="10"
+                    required
+                >
+
+                <label for="marca">Marca:</label>
+                <input
+                    type="text"
+                    id="marca"
+                    name="marca"
+                    value="{{ vehiculo.marca }}"
+                    maxlength="50"
+                    required
+                >
+
+                <label for="modelo">Modelo:</label>
+                <input
+                    type="text"
+                    id="modelo"
+                    name="modelo"
+                    value="{{ vehiculo.modelo }}"
+                    maxlength="50"
+                    required
+                >
+
+                <label for="anio">Año:</label>
+                <input
+                    type="number"
+                    id="anio"
+                    name="anio"
+                    value="{{ vehiculo.anio }}"
+                    min="1900"
+                    max="2100"
+                    required
+                >
+
+                <!-- Guardar los cambios -->
+                <button type="submit" class="boton-accion">
+                    Guardar cambios
+                </button>
+
+                <!-- Volver sin guardar los cambios -->
+                <a href="/vehiculos" class="boton-volver">
+                    ← Cancelar y volver a vehículos
+                </a>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>

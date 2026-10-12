@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo vehículo</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>TallerPro</h1>
+
+        <p>Sistema de gestión de taller</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section>
+
+            <h2>Registrar vehículo</h2>
+
+            <form action="/vehiculos/nuevo" method="POST">
+
+                <label for="cliente_id">Cliente:</label>
+
+                <select id="cliente_id" name="cliente_id">
+
+                    {% for cliente in clientes %}
+
+                        <option value="{{ cliente.id }}">
+                            {{ cliente.nombre }} {{ cliente.apellido }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <br><br>
+
+                <label for="patente">Patente:</label>
+                <input type="text" id="patente" name="patente">
+
+                <br><br>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca">
+
+                <br><br>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo">
+
+                <br><br>
+
+                <label for="anio">Año:</label>
+                <input type="number" id="anio" name="anio">
+
+                <br><br>
+
+                <button type="submit">Registrar vehículo</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

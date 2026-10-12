@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TallerPro | Órdenes de trabajo</title>
+
+    <!-- Conectamos el CSS de TallerPro -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+        <h1>TallerPro</h1>
+        <p>Gestión de órdenes de trabajo</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/#administracion">Administración</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/vehiculos">Vehículos</a>
+            <a href="/ordenes">Órdenes</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Órdenes de trabajo registradas</h2>
+
+            <!-- Botón para volver al inicio -->
+            <div class="acciones-pagina">
+                <a href="/" class="boton-volver">
+                    ← Volver al inicio
+                </a>
+            </div>
+
+            <!-- Listado de órdenes de trabajo -->
+            <div>
+
+                {% for orden in ordenes %}
+
+                <!-- Tarjeta individual de cada orden -->
+                <article class="orden-card">
+
+                    <h3>Orden #{{ orden.id }}</h3>
+
+                    <p>Vehículo ID: {{ orden.vehiculo_id }}</p>
+                    <p>Tipo: {{ orden.tipo_orden }}</p>
+                    <p>Fecha de ingreso: {{ orden.fecha_ingreso }}</p>
+                    <p>Servicio: {{ orden.tipo_servicio }}</p>
+                    <p>Descripción: {{ orden.descripcion }}</p>
+                    <p>Estado: {{ orden.estado }}</p>
+                    <p>Costo: ${{ orden.costo }}</p>
+
+                    <!-- Servicios asociados a la orden -->
+                    <h4 class="orden-subtitulo">Servicios asociados:</h4>
+
+                    {% for orden_servicio in orden_servicios %}
+
+                        {% if orden_servicio.orden_id == orden.id %}
+
+                            {% for servicio in servicios %}
+
+                                {% if servicio.id == orden_servicio.servicio_id %}
+
+                                    <p>
+                                        {{ servicio.nombre }}
+                                        - Cantidad: {{ orden_servicio.cantidad }}
+                                        - Precio: ${{ orden_servicio.precio_unitario }}
+                                    </p>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <!-- Repuestos asociados a la orden -->
+                    <h4 class="orden-subtitulo">Repuestos asociados:</h4>
+
+                    {% for orden_repuesto in orden_repuestos %}
+
+                        {% if orden_repuesto.orden_id == orden.id %}
+
+                            {% for repuesto in repuestos %}
+
+                                {% if repuesto.id == orden_repuesto.repuesto_id %}
+
+                                    <p>
+                                        {{ repuesto.nombre }}
+                                        - Cantidad: {{ orden_repuesto.cantidad }}
+                                        - Unidad: {{ repuesto.unidad_medida }}
+                                        - Precio: ${{ orden_repuesto.precio_unitario }}
+                                    </p>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <!-- Acciones disponibles para la orden -->
+                    <div class="orden-acciones">
+
+                        <!-- Editar la orden -->
+                        <a class="boton-accion"
+                           href="/ordenes/editar/{{ orden.id }}">
+                            Editar
+                        </a>
+
+                        <!-- Eliminar la orden con confirmación -->
+                        <a class="boton-accion"
+                           href="/ordenes/eliminar/{{ orden.id }}"
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta orden?');">
+                            Eliminar
+                        </a>
+
+                        <!-- Agregar un servicio -->
+                        <a class="boton-accion"
+                           href="/ordenes/{{ orden.id }}/servicios/nuevo">
+                            Agregar servicio
+                        </a>
+
+                        <!-- Agregar un repuesto -->
+                        <a class="boton-accion"
+                           href="/ordenes/{{ orden.id }}/repuestos/nuevo">
+                            Agregar repuesto
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 TallerPro</p>
+    </footer>
+
+</body>
+
+</html>
