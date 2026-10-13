@@ -2,7 +2,7 @@
 
 **Sistema de gestión para talleres mecánicos**, desarrollado con Python, Flask, SQLAlchemy y MySQL.
 
-TallerPro es una aplicación web orientada a facilitar la administración de clientes, vehículos y órdenes de trabajo de un taller mecánico, con una interfaz sencilla y organizada.
+TallerPro es una aplicación web orientada a facilitar la administración de clientes, vehículos y órdenes de trabajo de un taller mecánico, mediante una interfaz sencilla y organizada.
 
 ## 🚀 Funcionalidades
 
@@ -28,10 +28,11 @@ TallerPro es una aplicación web orientada a facilitar la administración de cli
 
 ```text
 TallerPro/
-├── backend/       # Aplicación y lógica del sistema
-├── database/      # Recursos relacionados con la base de datos
-├── frontend/      # Archivos de interfaz y estilos
-├── tests/         # Espacio para pruebas
+├── backend/          # Aplicación y lógica del sistema
+├── database/         # Esquema de la base de datos
+│   └── tallerpro.sql
+├── frontend/         # Archivos de interfaz y estilos
+├── tests/            # Directorio para pruebas
 ├── .gitignore
 ├── requirements.txt
 └── README.md
@@ -46,15 +47,15 @@ git clone https://github.com/facundoibanez1987-eng/TallerPro.git
 cd TallerPro
 ```
 
-### 2. Instalar las dependencias
+### 2. Crear un entorno virtual
 
-Se recomienda utilizar un entorno virtual.
+Se recomienda utilizar un entorno virtual para instalar las dependencias del proyecto de forma aislada.
 
 ```bash
 python -m venv .venv
 ```
 
-Activarlo en Windows:
+En Windows, activar el entorno virtual con PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -70,9 +71,23 @@ pip install -r requirements.txt
 
 Es necesario tener MySQL instalado y en funcionamiento.
 
-Crear la base de datos `TallerPro` y configurar las variables de conexión en un archivo `.env` ubicado en la carpeta principal del proyecto.
+Crear una base de datos llamada `TallerPro`:
 
-El archivo debe contener las siguientes variables, con los valores correspondientes a tu instalación:
+```sql
+CREATE DATABASE TallerPro;
+```
+
+**Importar la estructura de las tablas:**
+
+Desde MySQL Workbench, utilizar la opción de importación de un archivo SQL y seleccionar:
+
+```text
+database/tallerpro.sql
+```
+
+Importar este archivo en la base de datos `TallerPro` recién creada. El archivo contiene instrucciones para eliminar y volver a crear tablas, por lo que no debe ejecutarse sobre una base que contenga información que se quiera conservar.
+
+Crear un archivo `.env` en la carpeta principal del proyecto con las siguientes variables, utilizando los valores correspondientes a la instalación local de MySQL:
 
 ```dotenv
 DB_USER=tu_usuario
@@ -82,7 +97,7 @@ DB_PORT=3306
 DB_NAME=TallerPro
 ```
 
-**Importante:** el archivo `.env` contiene datos de conexión locales y no debe subirse a GitHub.
+**Importante:** el archivo `.env` contiene credenciales locales y no debe subirse a GitHub.
 
 ### 4. Iniciar la aplicación
 
